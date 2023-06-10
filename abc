@@ -1,0 +1,23 @@
+# Basierend auf der offiziellen Node.js-Basis
+FROM node:16
+
+# Erstelle einen Ordner für die Anwendung im Container
+WORKDIR /usr/src/app
+
+# Kopiere package.json und package-lock.json in den Arbeitsordner
+COPY package*.json ./
+
+# Installiere die Abhängigkeiten
+RUN npm install
+
+# Kopiere den Rest des Anwendungscodes in den Arbeitsordner
+COPY . .
+
+# Kompiliere TypeScript zu JavaScript
+RUN npm run build
+
+# Exponiere den Port, auf dem der Server läuft, nutze hier variable PORT aus .env
+EXPOSE 8080
+
+# Starte die Anwendung
+CMD [ "node", "dist/index.js" ]

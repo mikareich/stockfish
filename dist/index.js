@@ -16,6 +16,7 @@ const express_1 = __importDefault(require("express"));
 const analyseFen_1 = __importDefault(require("./analyseFen"));
 const chess_js_1 = require("chess.js");
 const app = (0, express_1.default)();
+const PORT = process.env.PORT || 8080;
 app.get("/analysis", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { fen, depth } = req.query;
     if (!fen) {
@@ -31,7 +32,7 @@ app.get("/analysis", (req, res) => __awaiter(void 0, void 0, void 0, function* (
     const analysis = yield (0, analyseFen_1.default)(fen, Number(depth) || 10);
     return res.json(Object.assign({ fen, depth: Number(depth) || 10 }, analysis));
 }));
-app.listen(3000, () => {
-    console.log("Server is running on port 3000");
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
 //# sourceMappingURL=index.js.map
