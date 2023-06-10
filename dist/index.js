@@ -16,7 +16,7 @@ const express_1 = __importDefault(require("express"));
 const analyseFen_1 = __importDefault(require("./analyseFen"));
 const chess_js_1 = require("chess.js");
 const app = (0, express_1.default)();
-const PORT = process.env.PORT || 8080;
+const PORT = 3000;
 app.get("/analysis", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { fen, depth } = req.query;
     if (!fen) {

@@ -3,7 +3,7 @@ import analyseFen from "./analyseFen";
 import { Chess } from "chess.js";
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = 3000;
 
 app.get("/analysis", async (req, res) => {
   const { fen, depth } = req.query;
