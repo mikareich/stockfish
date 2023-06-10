@@ -3,7 +3,7 @@ const Stockfish = require("stockfish.wasm");
 export default async function analyseFen(
   fen: string,
   depth: number
-): Promise<{ bestMove: string; evauluation: number }> {
+): Promise<{ bestMove: string; evaluation: number }> {
   const stockfish = await Stockfish();
 
   stockfish.postMessage(`position fen ${fen}`);
