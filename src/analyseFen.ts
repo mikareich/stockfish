@@ -10,7 +10,7 @@ export default async function analyseFen(
   stockfish.postMessage(`go depth ${depth}`);
 
   return new Promise((resolve) => {
-    let bestMove: string, evauluation: number;
+    let bestMove: string, evaluation: number;
 
     stockfish.addMessageListener((msg: any) => {
       if (msg.includes("bestmove")) {
@@ -19,13 +19,13 @@ export default async function analyseFen(
         stockfish.postMessage("eval");
       }
       if (msg.includes("Final evaluation:")) {
-        evauluation = Number(
+        evaluation = Number(
           msg.match(/Final evaluation:\s+(-?\d+(\.\d+)?)/)?.[1]
         );
       }
 
-      if (bestMove && evauluation) {
-        resolve({ bestMove, evauluation });
+      if (bestMove && evaluation) {
+        resolve({ bestMove, evaluation });
       }
     });
   });
