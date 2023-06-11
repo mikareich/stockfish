@@ -19,14 +19,16 @@ app.get("/analysis", async (req, res) => {
     return res.status(400).json({ error: "Invalid fen" });
   }
 
-  let analysis: Analysis
+  let analysis: Analysis;
 
   try {
     analysis = await analyseFen(fen as string, Number(depth) || 10);
   } catch (error) {
-      return res.status(400).json({error: "Some"})
+    return res
+      .status(400)
+      .json({ error: "There was an error analysing the fen :(" });
   }
-  
+
   return res.json({
     fen,
     depth: Number(depth) || 10,
