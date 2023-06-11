@@ -1,5 +1,5 @@
 import express from "express";
-import analyseFen from "./analyseFen";
+import analyseFen, { Analysis } from "./analyseFen";
 import { Chess } from "chess.js";
 
 const app = express();
@@ -19,8 +19,14 @@ app.get("/analysis", async (req, res) => {
     return res.status(400).json({ error: "Invalid fen" });
   }
 
-  const analysis = await analyseFen(fen as string, Number(depth) || 10);
+  let analysis: Analysis
 
+  try {
+    analysis = await analyseFen(fen as string, Number(depth) || 10);
+  } catch (error) {
+      return res.status(400).json({error: "Some"})
+  }
+  
   return res.json({
     fen,
     depth: Number(depth) || 10,
